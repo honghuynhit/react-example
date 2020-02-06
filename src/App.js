@@ -1,26 +1,41 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Hello Amplify, I'm master Simplify
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+class App extends Component{
+
+  state = {
+    todos: []
+  }
+  // constructor(props){
+  //   super(props);
+  //   this.state = { list };
+  // }
+  async componentDidMount(){
+    try {
+      const res = await fetch('http://127.0.0.1:8000/api/');
+      const todos = await res.json();
+      console.log(todos)
+      this.setState({
+        todos
+      })
+    } catch (e) {
+      console.log(e)
+    }
+  }
+
+
+  render(){
+    return(
+      <div>
+        {this.state.todos.map(item =>(
+          <div key={item} id={item.id} className="test">
+            <h1>{item.title}</h1>
+            <span>{item.description}</span>
+          </div>
+        ))}
+      </div>
+    )
+  }
 }
 
 export default App;
