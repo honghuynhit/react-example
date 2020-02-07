@@ -28,7 +28,7 @@ class App extends Component{
     return(
       <>
       <div>
-        <h2>DEMO APP</h2>
+        <h2>DEMO APP EDIT</h2>
         {this.state.todos.map(item =>(
           <div key={item} id={item.id} className="test">
             <h1>{item.title}</h1>
